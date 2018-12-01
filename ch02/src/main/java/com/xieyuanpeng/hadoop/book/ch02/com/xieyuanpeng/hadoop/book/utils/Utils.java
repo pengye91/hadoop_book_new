@@ -14,7 +14,8 @@ public class Utils {
 
     public static Path mustOutputPath(String rawPathUri) throws IOException {
         Path rawPath = new Path(rawPathUri);
-        String newPath = rawPathUri + "_" + new Date();
+        Date nowDate = new Date();
+        String newPath = rawPathUri + "_" + Long.toString(nowDate.getTime());
         FileSystem fs = FileSystem.get(new Configuration());
         if (fs.exists(rawPath)) {
             fs.rename(rawPath, new Path(newPath));
