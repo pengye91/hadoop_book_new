@@ -12,7 +12,7 @@ import java.io.IOException;
  * @date 2018/11/21
  **/
 public class MaxTempMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
-    public static final int MISSING = 9999;
+    private static final int MISSING = 9999;
 
     @Override
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
