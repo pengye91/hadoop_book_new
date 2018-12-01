@@ -1,5 +1,6 @@
 package com.xieyuanpeng.hadoop.book.ch02;
 
+import com.xieyuanpeng.hadoop.book.ch02.com.xieyuanpeng.hadoop.book.utils.Utils;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -16,6 +17,7 @@ import org.apache.log4j.Logger;
 public class MaxTemp {
     private static Logger logger = Logger.getLogger(MaxTemp.class);
     private static final int ARGS_LENGTH = 2;
+    private static final String COMMA = ",";
 
     public static void main(String[] args) throws Exception {
         if (args.length != ARGS_LENGTH) {
@@ -28,8 +30,14 @@ public class MaxTemp {
         Job job = Job.getInstance(jobConf);
         job.setJarByClass(MaxTemp.class);
         job.setJobName("MaxTemp Job");
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        if (args[0].contains(COMMA)) {
+            FileInputFormat.addInputPaths(job, args[0]);
+        } else {
+            FileInputFormat.addInputPath(job, new Path(args[0]));
+        }
+
+        logger.info(Utils.mustOutputPath(args[1]).toUri());
+        FileOutputFormat.setOutputPath(job, Utils.mustOutputPath(args[1]));
 
         job.setMapperClass(MaxTempMapper.class);
         job.setReducerClass(MaxTempReducer.class);
