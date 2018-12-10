@@ -1,6 +1,5 @@
 package com.xieyuanpeng.hadoop.book.ch02;
 
-import com.xieyuanpeng.hadoop.book.ch02.com.xieyuanpeng.hadoop.book.utils.Utils;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -41,6 +40,8 @@ public class MaxTemp {
 
         job.setMapperClass(MaxTempMapper.class);
         job.setReducerClass(MaxTempReducer.class);
+
+        job.setCombinerClass(MaxTempReducer.class);
 
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);

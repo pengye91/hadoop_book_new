@@ -1,4 +1,4 @@
-package com.xieyuanpeng.hadoop.book.ch02.com.xieyuanpeng.hadoop.book.utils;
+package com.xieyuanpeng.hadoop.book.ch02;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
